@@ -6,6 +6,7 @@ import CurrentlyBuilding from './components/CurrentlyBuilding';
 import IdeaLog from './components/IdeaLog';
 import About from './components/About';
 import Footer from './components/Footer';
+import Banner from './components/Banner';
 import './styles/globals.css';
 
 const projects = [
@@ -42,6 +43,7 @@ const projects = [
 const App = () => {
   return (
     <div className="portfolio-app">
+      <Banner />
       <div className="container">
         <Hero />
         
@@ -72,9 +74,9 @@ const App = () => {
           <SectionHeader title="ABOUT" />
           <About />
         </section>
-
-        <Footer />
       </div>
+
+      <Footer />
 
       <style>{`
         .portfolio-app {
