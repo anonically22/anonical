@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@400;700&display=swap');
+@import './variables.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, .mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-cyan);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-mono);
+  transition: all 0.3s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-xxl);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-xl);
+  }
+}
+
+/* Base animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Utility for technical divider */
+.tech-divider {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: var(--space-xxxl);
+  line-height: 1.2;
+}
