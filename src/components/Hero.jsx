@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
+import TeaCup from './TeaCup'
 
 export default function Hero() {
   const [showContent, setShowContent] = useState(false)
@@ -91,7 +92,7 @@ export default function Hero() {
   return (
     <section className="hero" id="hero">
       <div className="hero-container">
-        <div className="hero-label">// creative lab</div>
+        <div className="hero-label">// creative lab.</div>
         <h1 
           className="hero-name" 
           aria-label="anonically22"
@@ -100,7 +101,20 @@ export default function Hero() {
           onMouseLeave={handleMouseLeave}
         >
           {hoverText !== null ? (
-            <span>{hoverText}</span>
+            hoverText.split('').map((char, i) => {
+              const isAnonicallyTarget = hoverText.length === 12
+              const isAnirbaanTarget = hoverText.length === 15
+              
+              let isColored = false
+              if (isAnonicallyTarget && i >= 10) isColored = true
+              if (isAnirbaanTarget && i < 8) isColored = true
+              
+              return (
+                <span key={i} style={{ color: isColored ? 'var(--c-orange)' : 'inherit' }}>
+                  {char}
+                </span>
+              )
+            })
           ) : (
             nameStr.split('').map((char, i) => (
               <span
@@ -108,7 +122,8 @@ export default function Hero() {
                 style={{
                   display: 'inline-block',
                   animation: showContent ? 'none' : `fadeInUp 400ms ease-out ${i * 60}ms forwards`,
-                  opacity: showContent ? 1 : 0
+                  opacity: showContent ? 1 : 0,
+                  color: i >= 10 ? 'var(--c-orange)' : 'inherit'
                 }}
               >
                 {char}
@@ -128,18 +143,20 @@ export default function Hero() {
             {subtitles[subtitleIdx]}
           </div>
         </div>
-        <p className={`hero-desc ${showContent ? 'show' : ''}`}>
-          Developer &amp; designer. The experimental side of Anirbaan Sarkar.
-        </p>
+        <div className={`hero-desc editorial-desc ${showContent ? 'show' : ''}`}>
+          <p>The official home for all my digital obsessions.</p>
+          <p>Products, research, experiments and other things that keep me awake.</p>
+          <p>Not everything belongs in a portfolio. Some things belong in a lab.</p>
+        </div>
         <div className={`hero-actions ${showContent ? 'show' : ''}`}>
           <a href="#working" className="btn-link">
-            See what I'm building
+            See what I'm building.
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M1 5L11 5M11 5L7 1M11 5L7 9"/>
             </svg>
           </a>
           <a href="https://anirbaansarkar.vercel.app" target="_blank" className="btn-link" rel="noopener noreferrer">
-            View formal portfolio
+            View anirbaan's portfolio.
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M1 11L11 1M11 1H4M11 1V8"/>
             </svg>
@@ -151,6 +168,11 @@ export default function Hero() {
           <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
       </div>
+
+      <div className={`hero-tea-wrapper ${showContent ? 'show' : ''}`} style={{ opacity: showContent ? 1 : 0, transition: 'opacity 1s ease' }}>
+        <TeaCup className="hero-tea" />
+      </div>
+
       <style>{`
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }

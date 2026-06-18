@@ -45,6 +45,7 @@ export default function Working() {
                 proj={proj} 
                 isWip={isWip} 
                 delayClass={delayClass} 
+                idx={idx}
               />
             )
           })}
@@ -54,7 +55,9 @@ export default function Working() {
   )
 }
 
-function ProjectCard({ proj, isWip, delayClass }) {
+import { Link } from 'react-router-dom'
+
+function ProjectCard({ proj, isWip, delayClass, idx }) {
   const [inView, setInView] = useState(false)
 
   useEffect(() => {
@@ -77,42 +80,30 @@ function ProjectCard({ proj, isWip, delayClass }) {
   return (
     <div 
       id={`proj-${proj.name.replace(/\s+/g, '-')}`}
-      className={`project-card reveal ${delayClass} ${inView ? 'is-visible' : ''}`}
+      className={`project-card editorial-card reveal ${delayClass} ${inView ? 'is-visible' : ''}`}
     >
-      <a href={proj.link} target="_blank" rel="noopener noreferrer" className="project-img-wrapper">
-        {proj.featured && <span className="tag tag--featured">Featured</span>}
-        <img src={proj.img} alt={proj.name} loading="lazy" />
-      </a>
-      <div className="project-card-body">
-        <div className="project-header">
-          <div>
-            {proj.type && <span className="tag">{proj.type}</span>}
-            <h3 className="project-title">{proj.name}</h3>
+      <div className="editorial-card-inner">
+        <div className="editorial-card-header">
+          <span className="editorial-number">{String(idx + 1).padStart(2, '0')}</span>
+          <div className="editorial-meta">
+            <span>{proj.type}</span>
+            <span>{proj.year}</span>
           </div>
-          <span className={`tag tag--status ${isWip ? 'wip' : ''}`}>{proj.status}</span>
         </div>
-        <div className="project-tagline">{proj.tagline}</div>
-        <p className="project-desc">{proj.description}</p>
-        <div className="project-tech">
-          {proj.tech.map(t => (
-            <span key={t} className="tag">{t}</span>
-          ))}
-        </div>
-        <div className="project-links">
-          <a href={proj.link} target="_blank" rel="noopener noreferrer" className="btn-link">
-            Live
+        
+        <Link to={`/project/${proj.id}`} className="editorial-img-wrapper">
+          <img src={proj.img} alt={proj.name} loading="lazy" />
+        </Link>
+        
+        <div className="editorial-card-body">
+          <h3 className="editorial-title">{proj.name}</h3>
+          <p className="editorial-desc">{proj.description}</p>
+          <Link to={`/project/${proj.id}`} className="btn-link editorial-link">
+            View Case Study
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M1 11L11 1M11 1H4M11 1V8"/>
             </svg>
-          </a>
-          {proj.github && (
-            <a href={proj.github} target="_blank" rel="noopener noreferrer" className="btn-link">
-              GitHub
-              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M1 11L11 1M11 1H4M11 1V8"/>
-              </svg>
-            </a>
-          )}
+          </Link>
         </div>
       </div>
     </div>

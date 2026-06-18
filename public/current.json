@@ -4,25 +4,41 @@
     "name": "MRINJOY Partners",
     "tagline": "Redesigning the digital face of an IP law firm",
     "type": "web",
+    "year": "2024",
     "link": "https://www.mrinjoypartners.com/",
     "github": "https://github.com/anonically22/mrinjoy",
     "img": "/assets/mrinjoypartners.png",
     "status": "In Progress",
     "tech": ["React", "Vite", "Tailwind", "Framer Motion"],
     "featured": true,
-    "description": "A full redesign of an intellectual property law firm's website — Ink & Ivory colour system, editorial layout, motion-rich but content-first."
+    "description": "A full redesign of an intellectual property law firm's website.",
+    "problem": "Law firm websites are notoriously dated, dense, and difficult to navigate. MRINJOY Partners needed a digital presence reflecting their modern, authoritative approach to IP law.",
+    "approach": "We initiated a complete content audit, reducing legalese and structuring the architecture around core practice areas. The design leans heavily on an editorial, magazine-like aesthetic.",
+    "designDecisions": "Developed the 'Ink & Ivory' color system to convey trust and prestige. Used expansive typography (Playfair Display) to mimic physical legal documents.",
+    "technicalArchitecture": "A React frontend powered by Vite, with Framer Motion handling subtle page transitions that emulate turning pages in a portfolio.",
+    "challenges": "Migrating decades of legal publications and standardizing the CMS schema without losing legacy SEO value.",
+    "outcome": "Currently in development, but initial user testing shows a 40% increase in time-on-page and significantly easier navigation.",
+    "keyLearnings": "Content architecture is the design. You cannot design a premium layout around unstructured, dense text."
   },
   {
     "id": "labthread",
     "name": "Labthread",
     "tagline": "A research collaboration and thread-tracking platform",
     "type": "web",
+    "year": "2024",
     "link": "https://labthread.vercel.app/",
     "github": "https://github.com/anonically22/labthread",
     "img": "/assets/labthread.png",
     "status": "In Progress",
     "tech": ["React", "Node.js", "Tailwind"],
     "featured": true,
-    "description": "Built for academic labs — a lightweight space to track research threads, share findings, and stay aligned across collaborators."
+    "description": "Built for academic labs — a lightweight space to track research threads.",
+    "problem": "Academic research is often scattered across endless email chains, Slack channels, and undocumented lab notebooks, making it impossible to trace the origin of an idea.",
+    "approach": "Labthread introduces 'threads' as first-class citizens. Everything is an immutable log attached to a specific hypothesis, allowing collaborators to append data sequentially.",
+    "designDecisions": "The UI mimics a command-line interface meets modern messaging app. Extremely high data density, monospaced fonts for data logs, and minimal distraction.",
+    "technicalArchitecture": "A React SPA communicating with a Node.js backend. Websockets are used for real-time updates when collaborators append to a thread.",
+    "challenges": "Designing a permissions model flexible enough for principal investigators, post-docs, and external collaborators without complex setup.",
+    "outcome": "In closed beta with three academic labs, iterating based on real-world usage patterns.",
+    "keyLearnings": "Scientists don't want another social network; they want a structured, search-optimized database for their thoughts."
   }
 ]

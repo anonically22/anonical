@@ -21,31 +21,49 @@ export default function Process() {
   }, [])
 
   return (
-    <section id="process" className="section section-alt">
+    <section id="process" className="section section-alt editorial-grid-section">
       <div className="container" id="process-section-content">
-        <div className={`section-label reveal ${inView ? 'is-visible' : ''}`}>How I work</div>
-        <h2 className={`section-heading reveal ${inView ? 'is-visible' : ''}`}>From fuzzy brief to shipped product</h2>
+        <div className={`editorial-header reveal ${inView ? 'is-visible' : ''}`}>
+          <div className="section-label">PROCESS</div>
+          <h2 className="editorial-heading">The frameworks that guide the work</h2>
+          <p className="editorial-sub">A set of core principles and methodologies that ensure quality, scalability, and impact across all projects.</p>
+        </div>
 
-        <div className="process-scroll-container">
-          <div className={`process-card reveal reveal-delay-1 ${inView ? 'is-visible' : ''}`}>
-            <div className="process-num">01</div>
-            <h3 className="process-name">Understand</h3>
-            <p className="process-desc">I start by reading everything — briefs, existing code, competitor sites, user complaints. The goal is to know the problem better than whoever brought it to me.</p>
+        <div className={`editorial-columns reveal reveal-delay-1 ${inView ? 'is-visible' : ''}`}>
+          <div className="editorial-col">
+            <h3 className="editorial-col-title">Ship before perfect</h3>
+            <p className="editorial-col-desc">The only way to test a hypothesis is to put it in the hands of users. Polishing a flawed concept in private is a waste of engineering bandwidth. Launch, observe, and iterate.</p>
           </div>
-          <div className={`process-card reveal reveal-delay-2 ${inView ? 'is-visible' : ''}`}>
-            <div className="process-num">02</div>
-            <h3 className="process-name">Design</h3>
-            <p className="process-desc">Wireframes stay ugly on purpose. I'm testing logic, not aesthetics. The palette and motion come after the structure earns them.</p>
+          <div className="editorial-col">
+            <h3 className="editorial-col-title">Systems over pages</h3>
+            <p className="editorial-col-desc">I don't design isolated screens. I build cohesive design systems and component libraries. Scalability comes from reusable logic, not duplicated effort.</p>
           </div>
-          <div className={`process-card reveal reveal-delay-3 ${inView ? 'is-visible' : ''}`}>
-            <div className="process-num">03</div>
-            <h3 className="process-name">Build</h3>
-            <p className="process-desc">Component-first, data-driven where possible. I write the parts that can be swapped out — JSON configs, design tokens, modular sections — so the thing can outlast my involvement.</p>
+          <div className="editorial-col">
+            <h3 className="editorial-col-title">Research matters</h3>
+            <p className="editorial-col-desc">Assumptions are dangerous. Every major architectural decision must be backed by either direct user feedback, established heuristics, or rigorous performance testing.</p>
           </div>
-          <div className={`process-card reveal reveal-delay-4 ${inView ? 'is-visible' : ''}`}>
-            <div className="process-num">04</div>
-            <h3 className="process-name">Ship &amp; Refine</h3>
-            <p className="process-desc">Launch is lap one. I watch how it performs, what breaks, what users ignore. The first version is a hypothesis. The second is usually better.</p>
+          <div className="editorial-col">
+            <h3 className="editorial-col-title">Clarity wins</h3>
+            <p className="editorial-col-desc">Clever code that cannot be read is bad code. Overly complex UIs confuse users. The goal is always to reduce friction—both for the user navigating the product, and the developer reading the codebase.</p>
+          </div>
+        </div>
+
+        <div className={`editorial-stats reveal reveal-delay-2 ${inView ? 'is-visible' : ''}`}>
+          <div className="editorial-stat">
+            <div className="editorial-stat-num">01</div>
+            <div className="editorial-stat-label">(Iteration Velocity)</div>
+          </div>
+          <div className="editorial-stat">
+            <div className="editorial-stat-num">02</div>
+            <div className="editorial-stat-label">(Architecture)</div>
+          </div>
+          <div className="editorial-stat">
+            <div className="editorial-stat-num">03</div>
+            <div className="editorial-stat-label">(Validation)</div>
+          </div>
+          <div className="editorial-stat">
+            <div className="editorial-stat-num">04</div>
+            <div className="editorial-stat-label">(Legibility)</div>
           </div>
         </div>
       </div>

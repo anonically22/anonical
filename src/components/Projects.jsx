@@ -7,14 +7,17 @@ export default function Projects() {
   const [inView, setInView] = useState(false)
 
   useEffect(() => {
-    fetch('/projects.json')
-      .then(res => res.json())
-      .then(data => {
-        setProjects(data)
-        const uniqueTypes = [...new Set(data.map(p => p.type).filter(Boolean))].sort()
-        setTypes(uniqueTypes)
-      })
-      .catch(err => console.warn('[anonically22]', err))
+    Promise.all([
+      fetch('/current.json').then(res => res.json()),
+      fetch('/projects.json').then(res => res.json())
+    ])
+    .then(([currentData, projectsData]) => {
+      const combined = [...currentData, ...projectsData]
+      setProjects(combined)
+      const uniqueTypes = [...new Set(combined.map(p => p.type).filter(Boolean))].sort()
+      setTypes(uniqueTypes)
+    })
+    .catch(err => console.warn('[anonically22]', err))
   }, [])
 
   useEffect(() => {
@@ -44,10 +47,10 @@ export default function Projects() {
   const filteredProjects = filter === 'all' ? projects : projects.filter(p => p.type === filter)
 
   return (
-    <section id="projects" className="section">
+    <section id="projects" className="section section-alt">
       <div className="container" id="projects-section-content">
-        <div className={`section-label reveal ${inView ? 'is-visible' : ''}`}>Projects</div>
-        <h2 className={`section-heading reveal ${inView ? 'is-visible' : ''}`}>Things I've shipped</h2>
+        <div className={`section-label reveal ${inView ? 'is-visible' : ''}`}>Work</div>
+        <h2 className={`section-heading reveal ${inView ? 'is-visible' : ''}`}>Currently Building & Shipped</h2>
         
         {types.length > 0 && (
           <div className={`filter-bar reveal ${inView ? 'is-visible' : ''}`}>
@@ -69,18 +72,14 @@ export default function Projects() {
           </div>
         )}
 
-        <div className="projects-grid">
+        <div className="folder-stack-container">
           {filteredProjects.map((proj, idx) => {
-            const isWip = proj.status === 'In Progress'
-            const delayClass = `reveal-delay-${(idx % 4) + 1}`
-            
             return (
-              <ProjectCard 
+              <FolderCard 
                 key={proj.name}
                 proj={proj} 
-                isWip={isWip} 
-                delayClass={delayClass}
-                inViewContainer={inView}
+                idx={idx}
+                total={filteredProjects.length}
               />
             )
           })}
@@ -90,69 +89,78 @@ export default function Projects() {
   )
 }
 
-function ProjectCard({ proj, isWip, delayClass, inViewContainer }) {
-  const [inView, setInView] = useState(false)
+import { Link } from 'react-router-dom'
 
-  useEffect(() => {
-    // Reset inview on proj name change to trigger animations
-    setInView(false)
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-    )
+// Reference palette based on the attached image vibe
+const FOLDER_COLORS = [
+  { bg: '#D63230', text: '#FFFFFF', meta: '#F3B3B3' }, // Red
+  { bg: '#A63C3C', text: '#FFFFFF', meta: '#D89E9E' }, // Dark Red
+  { bg: '#E5E7EB', text: '#111827', meta: '#6B7280' }, // Light Gray
+  { bg: '#374151', text: '#F9FAFB', meta: '#9CA3AF' }, // Dark Slate
+  { bg: '#1E293B', text: '#F8FAFC', meta: '#94A3B8' }, // Navy Slate
+  { bg: '#264635', text: '#ECFDF5', meta: '#A7F3D0' }, // Dark Green
+  { bg: '#D4B886', text: '#1C1917', meta: '#57534E' }, // Sand
+  { bg: '#1F2E45', text: '#F1F5F9', meta: '#94A3B8' }, // Navy Blue
+  { bg: '#8A4F3C', text: '#FFEDD5', meta: '#FDBA74' }, // Rust
+  { bg: '#8B7355', text: '#FEF3C7', meta: '#D4D4D8' }, // Olive
+  { bg: '#926100', text: '#FEF08A', meta: '#FDE047' }, // Dark Gold
+  { bg: '#A89F91', text: '#171717', meta: '#525252' }  // Putty
+]
 
-    const el = document.getElementById(`archive-${proj.name.replace(/\s+/g, '-')}`)
-    if (el) observer.observe(el)
-    
-    return () => observer.disconnect()
-  }, [proj.name])
+function FolderCard({ proj, idx, total }) {
+  const theme = FOLDER_COLORS[idx % FOLDER_COLORS.length]
+  const topOffset = 56 + (idx * 80) // Stacks down from nav, increased spacing to keep header visible
+
+  const isWip = proj.status === 'In Progress'
 
   return (
-    <div 
-      id={`archive-${proj.name.replace(/\s+/g, '-')}`}
-      className={`project-card reveal ${delayClass} ${inView ? 'is-visible' : ''}`}
+    <Link 
+      to={`/project/${proj.id}`}
+      id={`folder-${proj.name.replace(/\s+/g, '-')}`}
+      className="folder-card"
+      style={{
+        backgroundColor: theme.bg,
+        color: theme.text,
+        top: `${topOffset}px`,
+        zIndex: idx
+      }}
     >
-      <a href={proj.link} target="_blank" rel="noopener noreferrer" className="project-img-wrapper">
-        {proj.featured && <span className="tag tag--featured">Featured</span>}
-        <img src={proj.img} alt={proj.name} loading="lazy" />
-      </a>
-      <div className="project-card-body">
-        <div className="project-header">
-          <div>
-            {proj.type && <span className="tag">{proj.type}</span>}
-            <h3 className="project-title">{proj.name}</h3>
+      <div className="folder-card-inner">
+        <div className="folder-header" style={{ color: theme.meta }}>
+          <div className="folder-meta-left">
+            <span>{String(idx + 1).padStart(2, '0')}</span>
+            <span className="folder-id">/{proj.id}</span>
           </div>
-          <span className={`tag tag--status ${isWip ? 'wip' : ''}`}>{proj.status}</span>
-        </div>
-        <div className="project-tagline">{proj.tagline}</div>
-        <p className="project-desc">{proj.description}</p>
-        <div className="project-tech">
-          {proj.tech.map(t => (
-            <span key={t} className="tag">{t}</span>
-          ))}
-        </div>
-        <div className="project-links">
-          <a href={proj.link} target="_blank" rel="noopener noreferrer" className="btn-link">
-            Live
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M1 11L11 1M11 1H4M11 1V8"/>
-            </svg>
-          </a>
-          {proj.github && (
-            <a href={proj.github} target="_blank" rel="noopener noreferrer" className="btn-link">
-              GitHub
-              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M1 11L11 1M11 1H4M11 1V8"/>
+          <div className="folder-meta-center">
+            {proj.tagline || proj.type}
+          </div>
+          <div className="folder-meta-right">
+            <div className={`folder-bookmark ${isWip ? 'bookmark-wip' : 'bookmark-shipped'}`} style={{ borderColor: theme.meta }}>
+              <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" className="bookmark-icon">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
               </svg>
-            </a>
-          )}
+              <span>{isWip ? 'Working' : 'Shipped'}</span>
+            </div>
+            <div className="folder-year">{proj.year}</div>
+          </div>
+        </div>
+
+        <div className="folder-image">
+          <div className="folder-img-wrapper">
+            <img src={proj.img} alt={proj.name} loading="lazy" />
+          </div>
+        </div>
+
+        {proj.description && (
+          <div className="folder-desc">
+            {proj.description}
+          </div>
+        )}
+
+        <div className="folder-body">
+          <h2 className="folder-title">{proj.name}</h2>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
