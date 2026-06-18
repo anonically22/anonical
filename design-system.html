@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23111844'/><text x='16' y='20' fill='%23EAE0CF' font-family='monospace' font-size='12' text-anchor='middle'>a22</text></svg>" />
+  <title>Design System | anonically22</title>
+  <meta name="robots" content="noindex" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Base Variables */
+    :root {
+      --c-navy: #111844;
+      --c-navy-90: #191f4a;
+      --c-navy-80: #222857;
+      --c-blue: #4B5694;
+      --c-steel: #7288AE;
+      --c-beige: #EAE0CF;
+      
+      --bg-body: var(--c-navy);
+      --bg-surface: var(--c-navy-90);
+      --text-primary: #FFFFFF;
+      --text-secondary: var(--c-beige);
+      --text-muted: var(--c-steel);
+      --border: rgba(114, 136, 174, 0.2);
+      --border-hover: rgba(114, 136, 174, 0.4);
+      
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --text-2xs: 0.625rem;
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 2rem;
+      --text-4xl: 2.5rem;
+      --text-6xl: 4rem;
+      
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-24: 6rem;
+      --space-32: 8rem;
+
+      --gutter: 5vw;
+      --max-width: 1200px;
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      
+      --duration-fast: 150ms;
+      --duration-base: 300ms;
+      --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    /* DS Preview Styles */
+    .ds-preview {
+      padding: var(--space-12) 0;
+    }
+
+    .ds-preview h2 {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-steel);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--border);
+      margin-top: var(--space-16);
+    }
+
+    .ds-preview h2:first-child {
+      margin-top: 0;
+    }
+
+    .ds-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+      align-items: flex-start;
+    }
+
+    .ds-swatch {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: center;
+      min-width: 80px;
+    }
+
+    .ds-swatch-block {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .ds-swatch span {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .ds-type-row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+
+    .ds-type-sample {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-4);
+    }
+
+    .ds-type-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      color: var(--text-muted);
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+
+    /* Components */
+    .section-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-2);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2em 0.6em;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-2xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background-color: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .tag--status {
+      background-color: rgba(75, 86, 148, 0.2);
+      color: var(--c-blue);
+      border-color: rgba(75, 86, 148, 0.4);
+    }
+
+    .tag--status.wip {
+      background-color: rgba(234, 224, 207, 0.1);
+      color: var(--c-beige);
+      border-color: rgba(234, 224, 207, 0.3);
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--text-primary);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+    }
+
+    .btn-link svg {
+      width: 12px;
+      height: 12px;
+      transition: transform var(--duration-fast) var(--ease-out);
+    }
+
+    .btn-link:hover {
+      color: var(--c-blue);
+      border-color: var(--c-blue);
+    }
+
+    .btn-link:hover svg {
+      transform: translate(2px, -2px);
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background-color: var(--border);
+      margin-block: var(--space-12);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Nav -->
+  <header style="padding: 1.5rem var(--gutter); border-bottom: 1px solid var(--border); margin-bottom: var(--space-12);">
+    <a href="/" style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-muted); text-decoration: none;">← Back to anonically22</a>
+  </header>
+
+  <div class="container ds-preview" style="margin-bottom: var(--space-12);">
+    <h2>// design system reference</h2>
+
+    <!-- Palette -->
+    <h2>Palette</h2>
+    <div class="ds-row">
+      <div class="ds-swatch">
+        <div class="ds-swatch-block" style="background: #111844;"></div>
+        <span>--c-navy<br>#111844</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-block" style="background: #4B5694;"></div>
+        <span>--c-blue<br>#4B5694</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-block" style="background: #7288AE;"></div>
+        <span>--c-steel<br>#7288AE</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-block" style="background: #EAE0CF; border-color: rgba(114,136,174,0.3);"></div>
+        <span>--c-beige<br>#EAE0CF</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-block" style="background: #191f4a;"></div>
+        <span>--c-navy-90<br>#191f4a</span>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-block" style="background: #222857;"></div>
+        <span>--c-navy-80<br>#222857</span>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <h2>Typography</h2>
+    <div class="ds-type-row">
+      <div class="ds-type-sample">
+        <span class="ds-type-label">display / 6xl</span>
+        <span style="font-family: var(--font-display); font-size: var(--text-6xl); font-weight: 700; line-height: 1; color: var(--text-primary);">Aa</span>
+      </div>
+      <div class="ds-type-sample">
+        <span class="ds-type-label">display / 4xl</span>
+        <span style="font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 600; color: var(--text-primary);">anonically22</span>
+      </div>
+      <div class="ds-type-sample">
+        <span class="ds-type-label">display / italic</span>
+        <span style="font-family: var(--font-display); font-size: var(--text-3xl); font-style: italic; font-weight: 400; color: var(--c-steel);">builder.</span>
+      </div>
+      <div class="ds-type-sample">
+        <span class="ds-type-label">body / base</span>
+        <span style="font-family: var(--font-body); font-size: var(--text-base); color: var(--text-primary);">The quick brown fox jumps over the lazy dog.</span>
+      </div>
+      <div class="ds-type-sample">
+        <span class="ds-type-label">body / sm muted</span>
+        <span style="font-family: var(--font-body); font-size: var(--text-sm); color: var(--text-muted);">Secondary information lives here at reduced opacity.</span>
+      </div>
+      <div class="ds-type-sample">
+        <span class="ds-type-label">mono / label</span>
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.15em; text-transform: uppercase; color: var(--c-steel);">Section Label</span>
+      </div>
+      <div class="ds-type-sample">
+        <span class="ds-type-label">mono / tag</span>
+        <span class="tag">React</span>&nbsp;<span class="tag">Vite</span>&nbsp;<span class="tag">Tailwind</span>
+      </div>
+    </div>
+
+    <!-- Section label component -->
+    <h2>Components</h2>
+    <div class="ds-row" style="flex-direction: column; align-items: flex-start; gap: 1.5rem;">
+      <div>
+        <span class="section-label">Currently Working</span>
+      </div>
+      <div>
+        <span class="tag--status wip tag">In Progress</span>
+        &nbsp;
+        <span class="tag--status tag">Shipped</span>
+      </div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#" class="btn-link">
+          View Live
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M1 11L11 1M11 1H4M11 1V8"/>
+          </svg>
+        </a>
+        <a href="#" class="btn-link">
+          GitHub
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M1 11L11 1M11 1H4M11 1V8"/>
+          </svg>
+        </a>
+      </div>
+      <div class="divider" style="max-width: 300px; margin-block: 0;"></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23111844'/><text x='16' y='20' fill='%23EAE0CF' font-family='monospace' font-size='12' text-anchor='middle'>a22</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23111844'/><text x='16' y='24' fill='%23EAE0CF' font-family='Georgia, serif' font-style='italic' font-weight='700' font-size='24' text-anchor='middle'>a</text></svg>" />
   <title>Anirbaan Sarkar | anonically22</title>
   <meta name="description" content="Builder. Designer. Researcher. The creative lab of Anirbaan Sarkar." />
   <meta name="author" content="Anirbaan Sarkar" />
@@ -1139,7 +1139,7 @@
           <a href="#working" class="footer-link">Working</a>
           <a href="#about" class="footer-link">About</a>
           <a href="#process" class="footer-link">Process</a>
-          <a href="#projects" class="footer-link">Projects</a>
+          <a href="/design-system.html" class="footer-link">Design System →</a>
         </div>
         <div class="footer-col footer-links-col reveal reveal-delay-2">
           <a href="https://github.com/anonically22" target="_blank" rel="noopener" class="footer-link">GitHub ↗</a>
@@ -1274,54 +1274,60 @@
       }, 2200);
     }
 
-    // Easter egg
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-    let hoverTimeouts = [];
+    // Easter egg: Hacker text decode effect for the name
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let hoverInterval = null;
 
     nameEl.addEventListener('mouseenter', () => {
       if (prefersReducedMotion) return;
-      // Clear any pending timeouts
-      hoverTimeouts.forEach(clearTimeout);
-      hoverTimeouts = [];
-
-      spans.forEach((span, i) => {
-        let iterations = 0;
-        const maxIterations = 4;
+      clearInterval(hoverInterval);
+      
+      const targetText = "Anirbaan Sarkar";
+      let iteration = 0;
+      
+      hoverInterval = setInterval(() => {
+        nameEl.innerText = targetText
+          .split("")
+          .map((letter, index) => {
+            if(index < iteration) {
+              return targetText[index];
+            }
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("");
         
-        const scramble = () => {
-          if (iterations < maxIterations) {
-            span.textContent = chars[Math.floor(Math.random() * chars.length)];
-            iterations++;
-            hoverTimeouts.push(setTimeout(scramble, 40));
-          } else {
-            span.textContent = span.dataset.real;
-          }
-        };
-        hoverTimeouts.push(setTimeout(scramble, i * 20));
-      });
+        if(iteration >= targetText.length){
+          clearInterval(hoverInterval);
+        }
+        
+        iteration += 1 / 2;
+      }, 30);
     });
 
     nameEl.addEventListener('mouseleave', () => {
       if (prefersReducedMotion) return;
-      // Clear any pending timeouts
-      hoverTimeouts.forEach(clearTimeout);
-      hoverTimeouts = [];
+      clearInterval(hoverInterval);
       
-      spans.forEach((span, i) => {
-        let iterations = 0;
-        const maxIterations = 4;
+      const originalText = "anonically22";
+      let iteration = 0;
+      
+      hoverInterval = setInterval(() => {
+        nameEl.innerText = originalText
+          .split("")
+          .map((letter, index) => {
+            if(index < iteration) {
+              return originalText[index];
+            }
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("");
         
-        const scrambleBack = () => {
-          if (iterations < maxIterations) {
-            span.textContent = chars[Math.floor(Math.random() * chars.length)];
-            iterations++;
-            hoverTimeouts.push(setTimeout(scrambleBack, 40));
-          } else {
-            span.textContent = span.dataset.original;
-          }
-        };
-        hoverTimeouts.push(setTimeout(scrambleBack, i * 20));
-      });
+        if(iteration >= originalText.length){
+          clearInterval(hoverInterval);
+        }
+        
+        iteration += 1 / 2;
+      }, 30);
     });
 
     // Expose globally for later phases
