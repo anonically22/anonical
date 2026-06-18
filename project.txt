@@ -1,0 +1,24 @@
+file contains the project details:
+1. anirbaan's portfolio : 
+    link : https://anirbaansarkar.vercel.app
+    github : https://github.com/anonically22/portfolio-v2
+
+2. substrack :
+    link : https://subs-track-one.vercel.app/
+    github : https://github.com/anonically22/SubsTrack
+
+3. workbench :
+    link : https://workbench-nine.vercel.app/
+    github : https://github.com/anonically22/workbench
+
+4. secondlook :
+    link : https://secondlook-two.vercel.app/
+    github : https://github.com/anonically22/secondlook
+
+5. mrinjoy : (currently working)
+    link : https://www.mrinjoypartners.com/
+    github : https://github.com/anonically22/mrinjoy
+
+6. labthread : (currently working)
+    link : https://labthread.vercel.app/
+    github : https://github.com/anonically22/labthread

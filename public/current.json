@@ -1,0 +1,28 @@
+[
+  {
+    "id": "mrinjoy",
+    "name": "MRINJOY Partners",
+    "tagline": "Redesigning the digital face of an IP law firm",
+    "type": "web",
+    "link": "https://www.mrinjoypartners.com/",
+    "github": "https://github.com/anonically22/mrinjoy",
+    "img": "/mrinjoypartners.png",
+    "status": "In Progress",
+    "tech": ["React", "Vite", "Tailwind", "Framer Motion"],
+    "featured": true,
+    "description": "A full redesign of an intellectual property law firm's website — Ink & Ivory colour system, editorial layout, motion-rich but content-first."
+  },
+  {
+    "id": "labthread",
+    "name": "Labthread",
+    "tagline": "A research collaboration and thread-tracking platform",
+    "type": "web",
+    "link": "https://labthread.vercel.app/",
+    "github": "https://github.com/anonically22/labthread",
+    "img": "/labthread.png",
+    "status": "In Progress",
+    "tech": ["React", "Node.js", "Tailwind"],
+    "featured": true,
+    "description": "Built for academic labs — a lightweight space to track research threads, share findings, and stay aligned across collaborators."
+  }
+]

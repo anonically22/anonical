@@ -1,0 +1,54 @@
+[
+  {
+    "id": "secondlook",
+    "name": "Second Look",
+    "tagline": "AI-powered UX analysis for interfaces",
+    "type": "ai",
+    "link": "https://secondlook-two.vercel.app/",
+    "github": "https://github.com/anonically22/secondlook",
+    "img": "/secondlook.png",
+    "status": "Shipped",
+    "tech": ["React", "Claude API", "Vite", "Tailwind"],
+    "featured": true,
+    "description": "Upload any UI screenshot and get structured UX critique powered by Claude — hierarchy, accessibility, visual flow, and actionable fixes."
+  },
+  {
+    "id": "substrack",
+    "name": "SubsTrack",
+    "tagline": "Subscription finance tracker with smart insights",
+    "type": "finance",
+    "link": "https://subs-track-one.vercel.app/",
+    "github": "https://github.com/anonically22/SubsTrack",
+    "img": "/substrack.png",
+    "status": "Shipped",
+    "tech": ["React", "Vite", "Tailwind", "Recharts"],
+    "featured": false,
+    "description": "Track every recurring charge, visualise monthly burn, and catch forgotten subscriptions before they stack up."
+  },
+  {
+    "id": "workbench",
+    "name": "Workbench",
+    "tagline": "27+ UI and dev tools in one place",
+    "type": "tool",
+    "link": "https://workbench-nine.vercel.app/",
+    "github": "https://github.com/anonically22/workbench",
+    "img": "/workbench.png",
+    "status": "Shipped",
+    "tech": ["React", "Vite", "Tailwind"],
+    "featured": false,
+    "description": "A personal toolbox — colour pickers, converters, generators, formatters — built because switching between 27 browser tabs was the actual problem."
+  },
+  {
+    "id": "portfolio",
+    "name": "Portfolio",
+    "tagline": "The formal face. anirbaansarkar.vercel.app",
+    "type": "web",
+    "link": "https://anirbaansarkar.vercel.app",
+    "github": "https://github.com/anonically22/portfolio-v2",
+    "img": "/anirbaansarkar.png",
+    "status": "Shipped",
+    "tech": ["React", "Vite", "Tailwind", "Framer Motion"],
+    "featured": false,
+    "description": "The employer-facing portfolio. Clean, direct, SEO-optimised — the other side of the anonically22 split identity."
+  }
+]
